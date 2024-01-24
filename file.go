@@ -68,7 +68,7 @@ func SetCellStoreConstructor(constructor CellStoreConstructor) FileOption {
 	}
 }
 
-func SetCellStoreArgs(args ...any) FileOption {
+func SetCellStoreConstructorArgs(args ...any) FileOption {
 	return func(f *File) {
 		f.cellStoreConstructorArgs = args
 	}
