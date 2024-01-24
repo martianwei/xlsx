@@ -30,8 +30,8 @@ type Sheet struct {
 	cellStore       CellStore
 	currentRow      *Row
 	cellStoreName   string // The first part of the key used in
-			       // the cellStore.  This name is stable,
-			       // unlike the Name, which can change
+	// the cellStore.  This name is stable,
+	// unlike the Name, which can change
 }
 
 // NewSheet constructs a Sheet with the default CellStore and returns
@@ -47,8 +47,8 @@ func NewSheetWithCellStore(name string, constructor CellStoreConstructor) (*Shee
 		return nil, fmt.Errorf("sheet name is invalid: %w", err)
 	}
 	sheet := &Sheet{
-		Name: name,
-		Cols: &ColStore{},
+		Name:          name,
+		Cols:          &ColStore{},
 		cellStoreName: name,
 	}
 	var err error
@@ -945,7 +945,6 @@ func handleNumFmtIdForXLSX(NumFmtId int, styles *xlsxStyleSheet) (XfId int) {
 	return
 }
 
-
 func IsSaneSheetName(sheetName string) error {
 	runeLength := utf8.RuneCountInString(sheetName)
 	if runeLength > 31 || runeLength == 0 {
@@ -959,4 +958,8 @@ func IsSaneSheetName(sheetName string) error {
 		}
 	}
 	return nil
+}
+
+func (s *Sheet) GetCellStore() CellStore {
+	return s.cellStore
 }

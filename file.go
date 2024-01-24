@@ -61,6 +61,12 @@ func ValueOnly() FileOption {
 	}
 }
 
+func SetCellStoreConstructor(constructor CellStoreConstructor) FileOption {
+	return func(f *File) {
+		f.cellStoreConstructor = constructor
+	}
+}
+
 // NewFile creates a new File struct. You may pass it zero, one or
 // many FileOption functions that affect the behaviour of the file.
 func NewFile(options ...FileOption) *File {
@@ -202,15 +208,15 @@ func (f *File) AddSheetWithCellStore(sheetName string, constructor CellStoreCons
 	if _, exists := f.Sheet[sheetName]; exists {
 		return nil, fmt.Errorf("duplicate sheet name '%s'.", sheetName)
 	}
-	
+
 	if err := IsSaneSheetName(sheetName); err != nil {
 		return nil, fmt.Errorf("sheet name is not valid: %w", err)
 	}
 	sheet := &Sheet{
-		Name:     sheetName,
-		File:     f,
-		Selected: len(f.Sheets) == 0,
-		Cols:     &ColStore{},
+		Name:          sheetName,
+		File:          f,
+		Selected:      len(f.Sheets) == 0,
+		Cols:          &ColStore{},
 		cellStoreName: sheetName,
 	}
 
