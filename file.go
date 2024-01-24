@@ -15,19 +15,20 @@ import (
 // File is a high level structure providing a slice of Sheet structs
 // to the user.
 type File struct {
-	worksheets           map[string]*zip.File
-	worksheetRels        map[string]*zip.File
-	referenceTable       *RefTable
-	Date1904             bool
-	styles               *xlsxStyleSheet
-	Sheets               []*Sheet
-	Sheet                map[string]*Sheet
-	theme                *theme
-	DefinedNames         []*xlsxDefinedName
-	cellStoreConstructor CellStoreConstructor
-	rowLimit             int
-	colLimit             int
-	valueOnly            bool
+	worksheets               map[string]*zip.File
+	worksheetRels            map[string]*zip.File
+	referenceTable           *RefTable
+	Date1904                 bool
+	styles                   *xlsxStyleSheet
+	Sheets                   []*Sheet
+	Sheet                    map[string]*Sheet
+	theme                    *theme
+	DefinedNames             []*xlsxDefinedName
+	cellStoreConstructor     CellStoreConstructor
+	cellStoreConstructorArgs []any
+	rowLimit                 int
+	colLimit                 int
+	valueOnly                bool
 }
 
 const NoRowLimit int = -1
@@ -64,6 +65,12 @@ func ValueOnly() FileOption {
 func SetCellStoreConstructor(constructor CellStoreConstructor) FileOption {
 	return func(f *File) {
 		f.cellStoreConstructor = constructor
+	}
+}
+
+func SetCellStoreArgs(args ...any) FileOption {
+	return func(f *File) {
+		f.cellStoreConstructorArgs = args
 	}
 }
 

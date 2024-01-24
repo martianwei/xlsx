@@ -42,7 +42,7 @@ func NewSheet(name string) (*Sheet, error) {
 
 // NewSheetWithCellStore constructs a Sheet, backed by a CellStore,
 // for which you must provide the constructor function.
-func NewSheetWithCellStore(name string, constructor CellStoreConstructor) (*Sheet, error) {
+func NewSheetWithCellStore(name string, constructor CellStoreConstructor, cellStoreConstructorArgs ...any) (*Sheet, error) {
 	if err := IsSaneSheetName(name); err != nil {
 		return nil, fmt.Errorf("sheet name is invalid: %w", err)
 	}
@@ -52,7 +52,7 @@ func NewSheetWithCellStore(name string, constructor CellStoreConstructor) (*Shee
 		cellStoreName: name,
 	}
 	var err error
-	sheet.cellStore, err = constructor()
+	sheet.cellStore, err = constructor(cellStoreConstructorArgs...)
 	if err != nil {
 		return nil, fmt.Errorf("NewSheetWithCellStore: %w", err)
 	}
