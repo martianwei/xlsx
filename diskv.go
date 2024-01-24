@@ -349,7 +349,7 @@ const cellStorePrefix = "cellstore"
 
 // NewDiskVCellStore is a CellStoreConstructor than returns a
 // CellStore in terms of DiskV.
-func NewDiskVCellStore() (CellStore, error) {
+func NewDiskVCellStore(args ...any) (CellStore, error) {
 	cs := &DiskVCellStore{
 		buf: bytes.NewBuffer([]byte{}),
 	}
