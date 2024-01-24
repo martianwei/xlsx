@@ -129,12 +129,12 @@ func (s *Sheet) setCurrentRow(r *Row) {
 	if r != nil && r == s.currentRow {
 		return
 	}
-	if s.currentRow != nil && s.currentRow.isCustom {
-		err := s.cellStore.WriteRow(s.currentRow)
-		if err != nil {
-			panic(err)
-		}
-	}
+	// if s.currentRow != nil && s.currentRow.isCustom {
+	// 	err := s.cellStore.WriteRow(s.currentRow)
+	// 	if err != nil {
+	// 		panic(err)
+	// 	}
+	// }
 	s.currentRow = r
 }
 
