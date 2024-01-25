@@ -125,3 +125,7 @@ func SkipEmptyCells(flags *cellVisitorFlags) {
 func (r *Row) ForEachCell(cvf CellVisitorFunc, option ...CellVisitorOption) error {
 	return r.cellStoreRow.ForEachCell(cvf, option...)
 }
+
+func (r *Row) GetCellStoreRow() CellStoreRow {
+	return r.cellStoreRow
+}
