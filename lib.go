@@ -720,7 +720,8 @@ func readSheetFromFile(rsheet xlsxSheet, fi *File, sheetXMLMap map[string]string
 		return wrap(err)
 	}
 
-	sheet, err = NewSheetWithCellStore(rsheet.Name, fi.cellStoreConstructor, fi.cellStoreConstructorArgs...)
+	cellStoreConstructorArgs := append([]any{fi.Date1904}, fi.cellStoreConstructorArgs...)
+	sheet, err = NewSheetWithCellStore(rsheet.Name, fi.cellStoreConstructor, cellStoreConstructorArgs...)
 	if err != nil {
 		return wrap(err)
 	}
