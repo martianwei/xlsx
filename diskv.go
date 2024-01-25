@@ -349,7 +349,7 @@ const cellStorePrefix = "cellstore"
 
 // NewDiskVCellStore is a CellStoreConstructor than returns a
 // CellStore in terms of DiskV.
-func NewDiskVCellStore(args ...any) (CellStore, error) {
+func NewDiskVCellStore() (CellStore, error) {
 	cs := &DiskVCellStore{
 		buf: bytes.NewBuffer([]byte{}),
 	}
@@ -479,6 +479,11 @@ func (cs *DiskVCellStore) MakeRowWithLen(sheet *Sheet, len int) *Row {
 	mr := makeDiskVRow(sheet, cs.store)
 	mr.maxCol = len - 1
 	return mr.row
+}
+
+// HandleRow is a no-op for the DiskVCellStore, but we have to comply with the interface.
+func (cs *DiskVCellStore) HandleRow(r *Row, f *File) error {
+	return nil
 }
 
 // Close will remove the persisant storage for a given Sheet completely.

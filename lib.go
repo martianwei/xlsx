@@ -578,6 +578,7 @@ func readRowsFromSheet(Worksheet *xlsxWorksheet, file *File, sheet *Sheet, rowLi
 			cell.modified = true
 		}
 		sheet.cellStore.WriteRow(row)
+		sheet.cellStore.HandleRow(row, file)
 
 		insertRowIndex++
 	}
@@ -720,8 +721,7 @@ func readSheetFromFile(rsheet xlsxSheet, fi *File, sheetXMLMap map[string]string
 		return wrap(err)
 	}
 
-	cellStoreConstructorArgs := append([]any{fi.Date1904}, fi.cellStoreConstructorArgs...)
-	sheet, err = NewSheetWithCellStore(rsheet.Name, fi.cellStoreConstructor, cellStoreConstructorArgs...)
+	sheet, err = NewSheetWithCellStore(rsheet.Name, fi.cellStoreConstructor)
 	if err != nil {
 		return wrap(err)
 	}

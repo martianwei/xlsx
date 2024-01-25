@@ -68,22 +68,15 @@ func SetCellStoreConstructor(constructor CellStoreConstructor) FileOption {
 	}
 }
 
-func SetCellStoreConstructorArgs(args ...any) FileOption {
-	return func(f *File) {
-		f.cellStoreConstructorArgs = args
-	}
-}
-
 // NewFile creates a new File struct. You may pass it zero, one or
 // many FileOption functions that affect the behaviour of the file.
 func NewFile(options ...FileOption) *File {
 	f := &File{
-		Sheet:                make(map[string]*Sheet),
-		Sheets:               make([]*Sheet, 0),
-		DefinedNames:         make([]*xlsxDefinedName, 0),
-		rowLimit:             NoRowLimit,
-		colLimit:             NoColLimit,
-		cellStoreConstructor: NewMemoryCellStore,
+		Sheet:        make(map[string]*Sheet),
+		Sheets:       make([]*Sheet, 0),
+		DefinedNames: make([]*xlsxDefinedName, 0),
+		rowLimit:     NoRowLimit,
+		colLimit:     NoColLimit,
 	}
 	for _, opt := range options {
 		opt(f)

@@ -145,7 +145,7 @@ func UseMemoryCellStore(f *File) {
 }
 
 // NewMemoryCellStore returns a pointer to a newly allocated MemoryCellStore
-func NewMemoryCellStore(args ...any) (CellStore, error) {
+func NewMemoryCellStore() (CellStore, error) {
 	cs := &MemoryCellStore{
 		rows: make(map[string]*Row),
 	}
@@ -211,6 +211,11 @@ func (mcs *MemoryCellStore) MakeRowWithLen(sheet *Sheet, len int) *Row {
 // MakeRow returns an empty Row
 func (mcs *MemoryCellStore) MakeRow(sheet *Sheet) *Row {
 	return makeMemoryRow(sheet).row
+}
+
+// HandleRow is a nullOp for the MemoryCellStore, but we have to comply with the interface.
+func (mcs *MemoryCellStore) HandleRow(r *Row, f *File) error {
+	return nil
 }
 
 // Extract the row key from a provided cell key
