@@ -214,7 +214,7 @@ func (mcs *MemoryCellStore) MakeRow(sheet *Sheet) *Row {
 }
 
 // HandleRow is a nullOp for the MemoryCellStore, but we have to comply with the interface.
-func (mcs *MemoryCellStore) HandleRow(r *Row, f *File) error {
+func (mcs *MemoryCellStore) HandleRow(r *Row) error {
 	return nil
 }
 

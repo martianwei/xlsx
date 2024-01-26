@@ -20,7 +20,7 @@ type CellStore interface {
 	WriteRow(r *Row) error
 	MoveRow(r *Row, newIndex int) error
 	RemoveRow(key string) error
-	HandleRow(r *Row, f *File) error
+	HandleRow(r *Row) error
 	Close() error
 }
 

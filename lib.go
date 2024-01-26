@@ -578,7 +578,7 @@ func readRowsFromSheet(Worksheet *xlsxWorksheet, file *File, sheet *Sheet, rowLi
 			cell.modified = true
 		}
 		sheet.cellStore.WriteRow(row)
-		sheet.cellStore.HandleRow(row, file)
+		sheet.cellStore.HandleRow(row)
 
 		insertRowIndex++
 	}

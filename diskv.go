@@ -482,7 +482,7 @@ func (cs *DiskVCellStore) MakeRowWithLen(sheet *Sheet, len int) *Row {
 }
 
 // HandleRow is a no-op for the DiskVCellStore, but we have to comply with the interface.
-func (cs *DiskVCellStore) HandleRow(r *Row, f *File) error {
+func (cs *DiskVCellStore) HandleRow(r *Row) error {
 	return nil
 }
 
